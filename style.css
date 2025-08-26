@@ -1,0 +1,644 @@
+:root {
+    /* Game Theme Colors - Vibrant and Energetic */
+    --background: hsl(240, 21%, 15%);
+    --foreground: hsl(60, 9%, 98%);
+    
+    --card: hsl(240, 19%, 16%);
+    --card-foreground: hsl(60, 9%, 98%);
+    
+    /* Game Primary - Electric Blue */
+    --primary: hsl(217, 91%, 60%);
+    --primary-foreground: hsl(0, 0%, 100%);
+    --primary-glow: hsl(217, 91%, 70%);
+    
+    /* Game Secondary - Purple Accent */
+    --secondary: hsl(271, 81%, 56%);
+    --secondary-foreground: hsl(0, 0%, 100%);
+    
+    /* Success/Win - Vibrant Green */
+    --success: hsl(142, 76%, 36%);
+    --success-foreground: hsl(0, 0%, 100%);
+    --success-glow: hsl(142, 76%, 46%);
+    
+    /* Warning/Draw - Golden Yellow */
+    --warning: hsl(48, 96%, 53%);
+    --warning-foreground: hsl(45, 54%, 3%);
+    --warning-glow: hsl(48, 96%, 63%);
+    
+    /* Destructive/Lose - Vibrant Red */
+    --destructive: hsl(0, 84%, 60%);
+    --destructive-foreground: hsl(0, 0%, 100%);
+    --destructive-glow: hsl(0, 84%, 70%);
+    
+    /* Rock Choice - Earth Tones */
+    --rock: hsl(25, 50%, 44%);
+    --rock-foreground: hsl(0, 0%, 100%);
+    --rock-glow: hsl(25, 50%, 54%);
+    
+    /* Paper Choice - Clean White/Blue */
+    --paper: hsl(200, 98%, 39%);
+    --paper-foreground: hsl(0, 0%, 100%);
+    --paper-glow: hsl(200, 98%, 49%);
+    
+    /* Scissors Choice - Metallic Silver */
+    --scissors: hsl(220, 13%, 69%);
+    --scissors-foreground: hsl(220, 13%, 9%);
+    --scissors-glow: hsl(220, 13%, 79%);
+    
+    --muted: hsl(240, 19%, 16%);
+    --muted-foreground: hsl(240, 5%, 64%);
+    
+    --border: hsl(240, 19%, 27%);
+    
+    /* Game Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
+    --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--secondary));
+    --gradient-success: linear-gradient(135deg, var(--success), var(--success-glow));
+    --gradient-warning: linear-gradient(135deg, var(--warning), var(--warning-glow));
+    --gradient-destructive: linear-gradient(135deg, var(--destructive), var(--destructive-glow));
+    --gradient-rock: linear-gradient(135deg, var(--rock), var(--rock-glow));
+    --gradient-paper: linear-gradient(135deg, var(--paper), var(--paper-glow));
+    --gradient-scissors: linear-gradient(135deg, var(--scissors), var(--scissors-glow));
+    --gradient-background: linear-gradient(135deg, hsl(240, 21%, 15%), hsl(240, 21%, 18%));
+    
+    /* Game Shadows & Glows */
+    --shadow-game: 0 10px 30px -10px hsla(217, 91%, 60%, 0.3);
+    --shadow-win: 0 0 30px hsla(142, 76%, 46%, 0.4);
+    --shadow-lose: 0 0 30px hsla(0, 84%, 70%, 0.4);
+    --shadow-draw: 0 0 30px hsla(48, 96%, 63%, 0.4);
+    --shadow-choice: 0 8px 25px -8px hsla(0, 0%, 0%, 0.3);
+    
+    /* Game Animations */
+    --transition-game: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: var(--gradient-background);
+    color: var(--foreground);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Setup Screen Styles */
+.setup-container {
+    text-align: center;
+    max-width: 600px;
+    animation: slideUp 0.5s ease-out;
+}
+
+.game-header {
+    margin-bottom: 3rem;
+}
+
+.game-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.game-subtitle {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--foreground);
+    margin-bottom: 1rem;
+}
+
+.game-description {
+    font-size: 1.25rem;
+    color: var(--muted-foreground);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .mode-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .game-title {
+        font-size: 6rem;
+    }
+    
+    .game-subtitle {
+        font-size: 5rem;
+    }
+}
+
+/* Game Screen Styles */
+.game-container {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Score Display */
+.score-display {
+    background: hsla(240, 19%, 16%, 0.9);
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px -8px hsla(0, 0%, 0%, 0.3);
+    width: 100%;
+    max-width: 28rem;
+    margin: 0 auto;
+    animation: slideUp 0.5s ease-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.score-section {
+    text-align: center;
+}
+
+.score-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsla(60, 9%, 98%, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.score-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.3);
+}
+
+.player-score {
+    color: var(--primary);
+}
+
+.computer-score {
+    color: var(--destructive);
+}
+
+.round-info {
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.round-label {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.25rem;
+}
+
+.round-counter {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--foreground);
+}
+
+.progress-bar {
+    width: 100%;
+    max-width: 28rem;
+    height: 0.5rem;
+    background: var(--muted);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 9999px;
+    transition: width 0.5s ease-out;
+    width: 0%;
+}
+
+/* Choice Section */
+.choice-section {
+    text-align: center;
+    width: 100%;
+}
+
+.choice-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--foreground);
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .choice-title {
+        font-size: 3rem;
+    }
+}
+
+.choices-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .choices-container {
+        gap: 2rem;
+    }
+}
+
+/* Choice Buttons */
+.choice-btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    border: 2px solid transparent;
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition-game);
+    transform: translateZ(0);
+    box-shadow: var(--shadow-choice);
+}
+
+@media (min-width: 768px) {
+    .choice-btn {
+        width: 7rem;
+        height: 7rem;
+    }
+}
+
+.choice-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-game);
+}
+
+.choice-btn:active {
+    transform: scale(0.95);
+}
+
+.choice-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.choice-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .choice-emoji {
+        font-size: 2.5rem;
+    }
+}
+
+.choice-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* Choice Button Variants */
+.rock-btn {
+    background: var(--gradient-rock);
+    color: var(--rock-foreground);
+}
+
+.rock-btn:hover {
+    box-shadow: var(--shadow-choice), 0 0 20px hsla(25, 50%, 54%, 0.5);
+}
+
+.paper-btn {
+    background: var(--gradient-paper);
+    color: var(--paper-foreground);
+}
+
+.paper-btn:hover {
+    box-shadow: var(--shadow-choice), 0 0 20px hsla(200, 98%, 49%, 0.5);
+}
+
+.scissors-btn {
+    background: var(--gradient-scissors);
+    color: var(--scissors-foreground);
+}
+
+.scissors-btn:hover {
+    box-shadow: var(--shadow-choice), 0 0 20px hsla(220, 13%, 79%, 0.5);
+}
+
+/* Result Section */
+.result-section {
+    text-align: center;
+    width: 100%;
+    animation: slideUp 0.5s ease-out;
+}
+
+.battle-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .battle-display {
+        gap: 3rem;
+    }
+}
+
+.player-choice,
+.computer-choice {
+    text-align: center;
+}
+
+.choice-display {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .choice-display {
+        font-size: 5rem;
+    }
+}
+
+.choice-owner {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: hsla(60, 9%, 98%, 0.8);
+}
+
+.vs-divider {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--muted-foreground);
+}
+
+.result-message {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .result-message {
+        font-size: 3rem;
+    }
+}
+
+/* Result Message Variants */
+.result-win {
+    color: hsl(142, 76%, 46%);
+    text-shadow: 0 0 10px hsla(142, 76%, 46%, 0.5);
+    animation: celebrateWin 1s ease-out;
+}
+
+.result-lose {
+    color: hsl(0, 84%, 70%);
+    text-shadow: 0 0 10px hsla(0, 84%, 70%, 0.5);
+    animation: shakeLose 0.6s ease-out;
+}
+
+.result-draw {
+    color: hsl(48, 96%, 63%);
+    text-shadow: 0 0 10px hsla(48, 96%, 63%, 0.5);
+    animation: flashDraw 0.8s ease-out;
+}
+
+/* Game Over Section */
+.game-over-section {
+    text-align: center;
+    width: 100%;
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.game-over-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.game-over-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+    .game-over-title {
+        font-size: 4rem;
+    }
+}
+
+.final-result-message {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .final-result-message {
+        font-size: 2rem;
+    }
+}
+
+.game-over-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (min-width: 640px) {
+    .game-over-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+/* Button Styles */
+.mode-btn,
+.game-btn {
+    padding: 0.75rem 2rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-game);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+}
+
+.mode-btn:hover,
+.game-btn:hover {
+    transform: scale(1.05);
+}
+
+.mode-btn:active,
+.game-btn:active {
+    transform: scale(0.95);
+}
+
+.primary-btn {
+    background: var(--gradient-primary);
+    color: var(--primary-foreground);
+    box-shadow: var(--shadow-game);
+}
+
+.secondary-btn {
+    background: var(--gradient-secondary);
+    color: var(--secondary-foreground);
+    box-shadow: var(--shadow-game);
+}
+
+.outline-btn {
+    background: transparent;
+    color: var(--foreground);
+    border: 2px solid var(--border);
+}
+
+.outline-btn:hover {
+    background: hsla(240, 19%, 27%, 0.5);
+    border-color: var(--primary);
+}
+
+.small {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    min-width: auto;
+}
+
+/* Back Button */
+.back-button {
+    margin-top: 2rem;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes celebrateWin {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(5deg); }
+    50% { transform: scale(1.15) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes shakeLose {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes flashDraw {
+    0%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { 
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% { 
+        transform: scale(1.05);
+        filter: brightness(1.2);
+    }
+}
+
+/* Selected Animation */
+.selected {
+    animation: pulseGlow 0.6s ease-in-out;
+}
+
+/* Result Animations for Choices */
+.choice-btn.result-win {
+    animation: celebrateWin 1s ease-out;
+    box-shadow: var(--shadow-win);
+}
+
+.choice-btn.result-lose {
+    animation: shakeLose 0.6s ease-out;
+    box-shadow: var(--shadow-lose);
+}
+
+.choice-btn.result-draw {
+    animation: flashDraw 0.8s ease-out;
+    box-shadow: var(--shadow-draw);
+}
