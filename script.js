@@ -9,6 +9,7 @@ let gameState = {
     result: null,
     phase: 'setup', // 'setup', 'playing', 'result', 'gameOver'
     finalResult: null,
+    playerName: "Player", // Default name (can be updated with input)
 };
 
 // Game choices
@@ -54,6 +55,10 @@ const playerChoiceEmoji = document.getElementById('playerChoiceEmoji');
 const computerChoiceEmoji = document.getElementById('computerChoiceEmoji');
 const resultMessage = document.getElementById('resultMessage');
 const finalResultMessage = document.getElementById('finalResultMessage');
+
+// Leaderboard elements
+const leaderboardSection = document.getElementById("leaderboardSection");
+const leaderboardBody = document.getElementById("leaderboardBody");
 
 // Utility Functions
 function getRandomChoice() {
@@ -102,6 +107,7 @@ function showGameContent(contentName) {
     resultSection.classList.add('hidden');
     gameOverSection.classList.add('hidden');
     backButton.classList.add('hidden');
+    leaderboardSection.classList.add("hidden");
     
     // Show target content
     if (contentName === 'choice') {
@@ -111,6 +117,8 @@ function showGameContent(contentName) {
         resultSection.classList.remove('hidden');
     } else if (contentName === 'gameOver') {
         gameOverSection.classList.remove('hidden');
+    } else if (contentName === 'leaderboard') {
+        leaderboardSection.classList.remove("hidden");
     }
 }
 
@@ -178,6 +186,7 @@ function makeChoice(choice) {
     if (isGameOver) {
         if (gameState.playerScore > gameState.computerScore) {
             gameState.finalResult = 'win';
+            saveToLeaderboard(gameState.playerName, gameState.playerScore);
         } else if (gameState.computerScore > gameState.playerScore) {
             gameState.finalResult = 'lose';
         } else {
@@ -223,6 +232,7 @@ function showGameOver() {
     finalResultMessage.className = `final-result-message result-${gameState.finalResult}`;
     
     showGameContent('gameOver');
+    showLeaderboard();
 }
 
 function nextRound() {
@@ -264,13 +274,40 @@ function newGame() {
         result: null,
         phase: 'setup',
         finalResult: null,
+        playerName: "Player"
     };
     
     showScreen('setup');
 }
 
+// Save score to leaderboard (localStorage)
+function saveToLeaderboard(name, score) {
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.push({ name, score });
+    leaderboard.sort((a, b) => b.score - a.score);
+    leaderboard = leaderboard.slice(0, 5); // Keep top 5
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
+
+// Show leaderboard
+function showLeaderboard() {
+    leaderboardBody.innerHTML = "";
+
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.forEach((entry, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${entry.name}</td>
+            <td>${entry.score}</td>
+        `;
+        leaderboardBody.appendChild(row);
+    });
+
+    showGameContent("leaderboard");
+}
+
 // Initialize the game
 document.addEventListener('DOMContentLoaded', function() {
-    // Game starts in setup mode by default
     showScreen('setup');
 });

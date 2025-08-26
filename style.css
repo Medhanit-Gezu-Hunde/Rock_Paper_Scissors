@@ -642,3 +642,45 @@ body {
     animation: flashDraw 0.8s ease-out;
     box-shadow: var(--shadow-draw);
 }
+/* Leaderboard Section */
+.leaderboard-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.leaderboard-title {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #ff9800;
+}
+
+.leaderboard-table {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.leaderboard-table th, 
+.leaderboard-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-table th {
+  background: #ff9800;
+  color: #fff;
+  font-weight: bold;
+}
+
+.leaderboard-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.leaderboard-buttons {
+  margin-top: 15px;
+}
