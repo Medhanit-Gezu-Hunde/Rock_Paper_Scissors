@@ -781,3 +781,66 @@ body {
     font-size: 3.5rem;
   }
 }
+/* Player Name Input */
+.player-name-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 400px;
+  width: 100%;
+  animation: slideUp 0.5s ease-out;
+}
+
+.player-name-input label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--foreground);
+  text-align: center;
+}
+
+.player-name-input input {
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--border);
+  background: hsla(240, 19%, 16%, 0.9);
+  color: var(--foreground);
+  width: 100%;
+  max-width: 300px;
+  outline: none;
+  transition: var(--transition-game);
+  text-align: center;
+  box-shadow: var(--shadow-choice);
+}
+
+.player-name-input input::placeholder {
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+.player-name-input input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 15px hsla(217, 91%, 60%, 0.5);
+}
+
+/* Responsiveness */
+@media (max-width: 480px) {
+  .player-name-input input {
+    font-size: 1rem;
+    padding: 0.6rem 0.9rem;
+    max-width: 90%;
+  }
+
+  .player-name-input label {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .player-name-input input {
+    font-size: 1.2rem;
+    max-width: 350px;
+  }
+}

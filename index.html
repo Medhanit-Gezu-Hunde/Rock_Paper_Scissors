@@ -1,138 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors - Interactive Game</title>
-    <meta name="description" content="Play the classic Rock Paper Scissors game with beautiful animations and responsive design. Choose 5 or 7 rounds and challenge the computer!">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors - Interactive Game</title>
+  <meta name="description" content="Play the classic Rock Paper Scissors game with beautiful animations and responsive design. Choose 5 or 7 rounds and challenge the computer!">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app" class="min-h-screen">
-        <!-- Game Setup Screen -->
-        <div id="setupScreen" class="screen active">
-            <div class="setup-container">
-                <div class="game-header">
-                    <h1 class="game-title">✊ ✋ ✌️</h1>
-                    <h2 class="game-subtitle">Rock Paper Scissors</h2>
-                    <p class="game-description">Choose your game mode to start the battle!</p>
-                </div>
-                
-                <div class="mode-buttons">
-                    <button class="mode-btn primary-btn" onclick="startGame(5)">5 Rounds</button>
-                    <button class="mode-btn secondary-btn" onclick="startGame(7)">7 Rounds</button>
-                </div>
-            </div>
+  <div id="app" class="min-h-screen">
+    <!-- Game Setup Screen -->
+    <div id="setupScreen" class="screen active">
+      <div class="setup-container">
+        <div class="game-header">
+          <h1 class="game-title">✊ ✋ ✌️</h1>
+          <h2 class="game-subtitle">Rock Paper Scissors</h2>
+          <p class="game-description">Enter your name & choose your game mode!</p>
         </div>
 
-        <!-- Game Playing Screen -->
-        <div id="gameScreen" class="screen">
-            <div class="game-container">
-                <!-- Score Display -->
-                <div class="score-display">
-                    <div class="score-section">
-                        <h3 class="score-label">You</h3>
-                        <span id="playerScore" class="score-number player-score">0</span>
-                    </div>
-                    
-                    <div class="round-info">
-                        <div class="round-label">Round</div>
-                        <div class="round-counter">
-                            <span id="currentRound">0</span> / <span id="maxRounds">7</span>
-                        </div>
-                    </div>
-                    
-                    <div class="score-section">
-                        <h3 class="score-label">Computer</h3>
-                        <span id="computerScore" class="score-number computer-score">0</span>
-                    </div>
-                </div>
-
-                <div class="progress-bar">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-
-                <!-- Game Content -->
-                <div id="choiceSection" class="choice-section">
-                    <h3 class="choice-title">Make Your Choice!</h3>
-                    <div class="choices-container">
-                        <button class="choice-btn rock-btn" onclick="makeChoice('rock')">
-                            <span class="choice-emoji">✊ </span>
-                            <span class="choice-label">Rock</span>
-                        </button>
-                        <button class="choice-btn paper-btn" onclick="makeChoice('paper')">
-                            <span class="choice-emoji">✋</span>
-                            <span class="choice-label">Paper</span>
-                        </button>
-                        <button class="choice-btn scissors-btn" onclick="makeChoice('scissors')">
-                            <span class="choice-emoji">✌️</span>
-                            <span class="choice-label">Scissors</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Result Display -->
-                <div id="resultSection" class="result-section hidden">
-                    <div class="battle-display">
-                        <div class="player-choice">
-                            <div id="playerChoiceEmoji" class="choice-display">✊</div>
-                            <p class="choice-owner">You</p>
-                        </div>
-                        
-                        <div class="vs-divider">VS</div>
-                        
-                        <div class="computer-choice">
-                            <div id="computerChoiceEmoji" class="choice-display">✊</div>
-                            <p class="choice-owner">Computer</p>
-                        </div>
-                    </div>
-                    
-                    <p id="resultMessage" class="result-message">You Win! 🎉</p>
-                </div>
-
-                <!-- Game Over Screen -->
-                <div id="gameOverSection" class="game-over-section hidden">
-                    <div class="game-over-content">
-                        <h2 class="game-over-title">Game Over!</h2>
-                        <p id="finalResultMessage" class="final-result-message">🏆 Congratulations! You Won the Game! 🏆</p>
-                        
-                        <div class="game-over-buttons">
-                            <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
-                            <button class="game-btn outline-btn" onclick="newGame()">New Game</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Back to Menu -->
-                <div id="backButton" class="back-button">
-                    <button class="game-btn outline-btn small" onclick="newGame()">Back to Menu</button>
-                </div>
-            </div>
+        <!-- Player Name Input -->
+        <div class="player-name-input">
+          <label for="playerNameInput">Enter Your Name:</label>
+          <input type="text" id="playerNameInput" placeholder="Player Name">
         </div>
+
+        <!-- Game Mode Buttons -->
+        <div class="mode-buttons">
+          <button class="mode-btn primary-btn" onclick="startGame(5)">5 Rounds</button>
+          <button class="mode-btn secondary-btn" onclick="startGame(7)">7 Rounds</button>
+        </div>
+      </div>
     </div>
-    <!-- Leaderboard Section -->
-<div id="leaderboardSection" class="leaderboard-section hidden">
+
+    <!-- Game Playing Screen -->
+    <div id="gameScreen" class="screen">
+      <div class="game-container">
+        <!-- Score Display -->
+        <div class="score-display">
+          <div class="score-section">
+            <h3 class="score-label" id="playerNameDisplay">You</h3>
+            <span id="playerScore" class="score-number player-score">0</span>
+          </div>
+
+          <div class="round-info">
+            <div class="round-label">Round</div>
+            <div class="round-counter">
+              <span id="currentRound">0</span> / <span id="maxRounds">7</span>
+            </div>
+          </div>
+
+          <div class="score-section">
+            <h3 class="score-label">Computer</h3>
+            <span id="computerScore" class="score-number computer-score">0</span>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <!-- Game Content -->
+        <div id="choiceSection" class="choice-section">
+          <h3 class="choice-title">Make Your Choice!</h3>
+          <div class="choices-container">
+            <button class="choice-btn rock-btn" onclick="makeChoice('rock')">
+              <span class="choice-emoji">✊</span>
+              <span class="choice-label">Rock</span>
+            </button>
+            <button class="choice-btn paper-btn" onclick="makeChoice('paper')">
+              <span class="choice-emoji">✋</span>
+              <span class="choice-label">Paper</span>
+            </button>
+            <button class="choice-btn scissors-btn" onclick="makeChoice('scissors')">
+              <span class="choice-emoji">✌️</span>
+              <span class="choice-label">Scissors</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Display -->
+        <div id="resultSection" class="result-section hidden">
+          <div class="battle-display">
+            <div class="player-choice">
+              <div id="playerChoiceEmoji" class="choice-display">✊</div>
+              <p class="choice-owner" id="playerChoiceLabel">You</p>
+            </div>
+
+            <div class="vs-divider">VS</div>
+
+            <div class="computer-choice">
+              <div id="computerChoiceEmoji" class="choice-display">✊</div>
+              <p class="choice-owner">Computer</p>
+            </div>
+          </div>
+
+          <p id="resultMessage" class="result-message">You Win! 🎉</p>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverSection" class="game-over-section hidden">
+          <div class="game-over-content">
+            <h2 class="game-over-title">Game Over!</h2>
+            <p id="finalResultMessage" class="final-result-message">🏆 Congratulations! You Won the Game! 🏆</p>
+
+            <div class="game-over-buttons">
+              <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
+              <button class="game-btn outline-btn" onclick="newGame()">New Game</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to Menu -->
+        <div id="backButton" class="back-button">
+          <button class="game-btn outline-btn small" onclick="newGame()">Back to Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard Section -->
+  <div id="leaderboardSection" class="leaderboard-section hidden">
     <div class="leaderboard-content">
-        <h2 class="leaderboard-title">🏆 Leaderboard 🏆</h2>
-        <table class="leaderboard-table">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Player</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboardBody">
-                <!-- Scores will be dynamically inserted -->
-            </tbody>
-        </table>
-        <div class="leaderboard-buttons">
-            <button class="game-btn primary-btn" onclick="newGame()">Play Again</button>
-            <button class="game-btn outline-btn" onclick="backToMenu()">Back to Menu</button>
-        </div>
+      <h2 class="leaderboard-title">🏆 Leaderboard 🏆</h2>
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- Scores will be dynamically inserted -->
+        </tbody>
+      </table>
+      <div class="leaderboard-buttons">
+        <button class="game-btn primary-btn" onclick="newGame()">Play Again</button>
+        <button class="game-btn outline-btn" onclick="backToMenu()">Back to Menu</button>
+      </div>
     </div>
-</div>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
