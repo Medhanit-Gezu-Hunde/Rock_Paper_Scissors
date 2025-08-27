@@ -716,3 +716,68 @@ body {
   gap: 1rem;
   flex-wrap: wrap;
 }
+/* Tablet Breakpoint */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .game-title {
+    font-size: 4.5rem;
+  }
+
+  .game-subtitle {
+    font-size: 3.5rem;
+  }
+
+  .choices-container {
+    gap: 2rem;
+  }
+
+  .choice-btn {
+    width: 7rem;
+    height: 7rem;
+    font-size: 1.25rem;
+  }
+
+  .leaderboard-content {
+    padding: 2.5rem;
+  }
+
+  .leaderboard-title {
+    font-size: 3rem;
+  }
+
+  .leaderboard-table th, 
+  .leaderboard-table td {
+    font-size: 1.2rem;
+  }
+}
+/* Desktop Breakpoint */
+@media (min-width: 1024px) {
+  .game-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+
+  /* Scoreboard on the left, game in center, leaderboard on right */
+  .score-display {
+    max-width: 22rem;
+    margin: 0;
+  }
+
+  .choice-section, 
+  .result-section {
+    flex: 1;
+  }
+
+  .leaderboard-section {
+    padding: 3rem;
+  }
+
+  .leaderboard-content {
+    max-width: 800px;
+  }
+
+  .leaderboard-title {
+    font-size: 3.5rem;
+  }
+}
