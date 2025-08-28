@@ -106,6 +106,8 @@
             <div class="game-over-buttons">
               <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
               <button class="game-btn outline-btn" onclick="newGame()">New Game</button>
+              <!-- ✅ New button for leaderboard -->
+              <button id="viewLeaderboardBtn" class="game-btn secondary-btn">View Leaderboard</button>
             </div>
           </div>
         </div>
@@ -135,8 +137,9 @@
         </tbody>
       </table>
       <div class="leaderboard-buttons">
-        <button class="game-btn primary-btn" onclick="newGame()">Play Again</button>
-        <button class="game-btn outline-btn" onclick="backToMenu()">Back to Menu</button>
+        <!-- ✅ Fixed Play Again to call playAgain() -->
+        <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
+        <button class="game-btn outline-btn" onclick="newGame()">Back to Menu</button>
       </div>
     </div>
   </div>

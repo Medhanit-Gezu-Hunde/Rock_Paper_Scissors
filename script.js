@@ -59,6 +59,7 @@ const finalResultMessage = document.getElementById('finalResultMessage');
 // Leaderboard elements
 const leaderboardSection = document.getElementById("leaderboardSection");
 const leaderboardBody = document.getElementById("leaderboardBody");
+const viewLeaderboardBtn = document.getElementById("viewLeaderboardBtn");
 
 // Utility Functions
 function getRandomChoice() {
@@ -222,9 +223,6 @@ function showGameOver() {
     finalResultMessage.className = `final-result-message result-${gameState.finalResult}`;
     
     showGameContent('gameOver');
-    
-    
-    renderLeaderboard();
 }
 
 function nextRound() {
@@ -280,7 +278,6 @@ function saveToLeaderboard(name, score) {
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
 
-
 function renderLeaderboard() {
     leaderboardBody.innerHTML = "";
     let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
@@ -293,12 +290,17 @@ function renderLeaderboard() {
         `;
         leaderboardBody.appendChild(row);
     });
-
-    // leaderboard section is shown together with gameOver
-    leaderboardSection.classList.remove("hidden");
 }
 
+// --- Event Listeners ---
 document.addEventListener('DOMContentLoaded', function() {
     showScreen('setup');
+
+    if (viewLeaderboardBtn) {
+        viewLeaderboardBtn.addEventListener("click", () => {
+            renderLeaderboard();
+            showGameContent("leaderboard");
+        });
+    }
 });
 
