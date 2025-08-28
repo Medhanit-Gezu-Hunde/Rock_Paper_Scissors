@@ -9,7 +9,7 @@ let gameState = {
     result: null,
     phase: 'setup', // 'setup', 'playing', 'result', 'gameOver'
     finalResult: null,
-    playerName: "Player", // Default name (can be updated with input)
+    playerName: "Player", // Default name (updated from input)
 };
 
 // Game choices
@@ -30,9 +30,9 @@ const resultMessages = {
 };
 
 const finalResultMessages = {
-    win: "🏆 Congratulations! You Won the Game! 🏆",
-    lose: "💔 Game Over! Better Luck Next Time! 💔",
-    draw: "🤝 It's a Tie! Great Game! 🤝"
+    win: "🏆 Congratulations <strong>{player}</strong>! You Won the Game! 🏆",
+    lose: "💔 Sorry <strong>{player}</strong>, You Lost! Better Luck Next Time 💔",
+    draw: "🤝 It's a Tie <strong>{player}</strong>! Great Game! 🤝"
 };
 
 // DOM Elements
@@ -83,17 +83,14 @@ function updateScoreDisplay() {
     currentRoundEl.textContent = gameState.currentRound;
     maxRoundsEl.textContent = gameState.maxRounds;
     
-    // Update progress bar
     const progress = (gameState.currentRound / gameState.maxRounds) * 100;
     progressFill.style.width = `${progress}%`;
 }
 
 function showScreen(screenName) {
-    // Hide all screens
     setupScreen.classList.remove('active');
     gameScreen.classList.remove('active');
     
-    // Show target screen
     if (screenName === 'setup') {
         setupScreen.classList.add('active');
     } else if (screenName === 'game') {
@@ -102,14 +99,12 @@ function showScreen(screenName) {
 }
 
 function showGameContent(contentName) {
-    // Hide all game content sections
     choiceSection.classList.add('hidden');
     resultSection.classList.add('hidden');
     gameOverSection.classList.add('hidden');
     backButton.classList.add('hidden');
     leaderboardSection.classList.add("hidden");
     
-    // Show target content
     if (contentName === 'choice') {
         choiceSection.classList.remove('hidden');
         backButton.classList.remove('hidden');
@@ -145,6 +140,9 @@ function highlightPlayerChoice(choice, result) {
 
 // Game Functions
 function startGame(rounds) {
+    const playerNameInput = document.getElementById("playerNameInput");
+    gameState.playerName = playerNameInput?.value.trim() || "Player";
+
     gameState = {
         ...gameState,
         maxRounds: rounds,
@@ -167,20 +165,17 @@ function makeChoice(choice) {
     const computerChoice = getRandomChoice();
     const result = determineWinner(choice, computerChoice);
     
-    // Update game state
     gameState.playerChoice = choice;
     gameState.computerChoice = computerChoice;
     gameState.result = result;
     gameState.currentRound += 1;
     
-    // Update scores
     if (result === 'win') {
         gameState.playerScore += 1;
     } else if (result === 'lose') {
         gameState.computerScore += 1;
     }
     
-    // Check if game is over
     const isGameOver = gameState.currentRound >= gameState.maxRounds;
     
     if (isGameOver) {
@@ -197,14 +192,10 @@ function makeChoice(choice) {
         gameState.phase = 'result';
     }
     
-    // Highlight player choice and show result
     highlightPlayerChoice(choice, result);
-    
-    // Update displays
     updateScoreDisplay();
     showResult();
     
-    // Auto-advance to next round or game over
     if (isGameOver) {
         setTimeout(() => {
             showGameOver();
@@ -217,22 +208,23 @@ function makeChoice(choice) {
 }
 
 function showResult() {
-    // Update result display
     playerChoiceEmoji.textContent = choiceEmojis[gameState.playerChoice];
     computerChoiceEmoji.textContent = choiceEmojis[gameState.computerChoice];
     resultMessage.textContent = resultMessages[gameState.result];
     resultMessage.className = `result-message result-${gameState.result}`;
     
-    // Show result section
     showGameContent('result');
 }
 
 function showGameOver() {
-    finalResultMessage.textContent = finalResultMessages[gameState.finalResult];
+    const msgTemplate = finalResultMessages[gameState.finalResult];
+    finalResultMessage.innerHTML = msgTemplate.replace("{player}", gameState.playerName);
     finalResultMessage.className = `final-result-message result-${gameState.finalResult}`;
     
     showGameContent('gameOver');
-    showLeaderboard();
+    
+    
+    renderLeaderboard();
 }
 
 function nextRound() {
@@ -280,19 +272,17 @@ function newGame() {
     showScreen('setup');
 }
 
-// Save score to leaderboard (localStorage)
 function saveToLeaderboard(name, score) {
     let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     leaderboard.push({ name, score });
     leaderboard.sort((a, b) => b.score - a.score);
-    leaderboard = leaderboard.slice(0, 5); // Keep top 5
+    leaderboard = leaderboard.slice(0, 5);
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
 
-// Show leaderboard
-function showLeaderboard() {
-    leaderboardBody.innerHTML = "";
 
+function renderLeaderboard() {
+    leaderboardBody.innerHTML = "";
     let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     leaderboard.forEach((entry, index) => {
         const row = document.createElement("tr");
@@ -304,10 +294,11 @@ function showLeaderboard() {
         leaderboardBody.appendChild(row);
     });
 
-    showGameContent("leaderboard");
+    // leaderboard section is shown together with gameOver
+    leaderboardSection.classList.remove("hidden");
 }
 
-// Initialize the game
 document.addEventListener('DOMContentLoaded', function() {
     showScreen('setup');
 });
+
