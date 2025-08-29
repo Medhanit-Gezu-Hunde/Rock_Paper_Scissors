@@ -9,7 +9,7 @@ let gameState = {
     result: null,
     phase: 'setup', // 'setup', 'playing', 'result', 'gameOver'
     finalResult: null,
-    playerName: "Player", // Default name (updated from input)
+    playerName: "Player", // Default name
 };
 
 // Game choices
