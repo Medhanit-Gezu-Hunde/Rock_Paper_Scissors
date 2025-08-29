@@ -8,6 +8,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <button class="nav-btn" onclick="newGame()"><img src="public/image/home.png" alt="home"></button>
+    <button class="nav-btn about-btn" onclick="openAbout()">ℹ️</button>    
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn"> <img src="public/image/people.png" alt="users"></button>
+    <button class="nav-btn"><img src="public/image/settings.png" alt="settings"></button>
+  </div>
+</nav>
+
+  <!-- About -->
+<div id="aboutModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeAbout()">&times;</span>
+    <h2>ℹ️ About the Game</h2>
+    <p>Welcome to Rock Paper Scissors!</p>
+    <ul>
+      <li>✊ Rock beats ✌️ Scissors</li>
+      <li>✋ Paper beats ✊ Rock</li>
+      <li>✌️ Scissors beats ✋ Paper</li>
+    </ul>
+    <p>Choose your move and see if you can beat the computer.  
+       Play in 5 or 7 rounds mode. Good luck 🎉!</p>
+  </div>
+</div>
+
   <div id="app" class="min-h-screen">
     <!-- Game Setup Screen -->
     <div id="setupScreen" class="screen active">

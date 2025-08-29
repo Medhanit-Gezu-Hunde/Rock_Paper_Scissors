@@ -61,7 +61,10 @@ const leaderboardSection = document.getElementById("leaderboardSection");
 const leaderboardBody = document.getElementById("leaderboardBody");
 const viewLeaderboardBtn = document.getElementById("viewLeaderboardBtn");
 
-// Utility Functions
+// About modal
+const aboutModal = document.getElementById("aboutModal");
+
+// ---------------------- Utility Functions ----------------------
 function getRandomChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
@@ -139,7 +142,7 @@ function highlightPlayerChoice(choice, result) {
     });
 }
 
-// Game Functions
+// ---------------------- Game Functions ----------------------
 function startGame(rounds) {
     const playerNameInput = document.getElementById("playerNameInput");
     gameState.playerName = playerNameInput?.value.trim() || "Player";
@@ -292,7 +295,7 @@ function renderLeaderboard() {
     });
 }
 
-// --- Event Listeners ---
+// ---------------------- Event Listeners ----------------------
 document.addEventListener('DOMContentLoaded', function() {
     showScreen('setup');
 
@@ -304,3 +307,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ---------------------- About Modal Functions ----------------------
+function openAbout() {
+    aboutModal.classList.remove("hidden");
+}
+
+function closeAbout() {
+    aboutModal.classList.add("hidden");
+}
+
+// Close modal when clicking outside content
+window.addEventListener("click", function(event) {
+    if (event.target === aboutModal) {
+        closeAbout();
+    }
+});
