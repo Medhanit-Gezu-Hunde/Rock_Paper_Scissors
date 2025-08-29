@@ -255,7 +255,9 @@ function playAgain() {
     updateScoreDisplay();
     resetChoiceButtons();
 }
-
+function toggleMenu() {
+  document.querySelector('.nav-right').classList.toggle('show');
+}
 function newGame() {
     gameState = {
         playerScore: 0,

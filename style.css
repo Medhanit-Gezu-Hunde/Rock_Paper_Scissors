@@ -847,23 +847,23 @@ body {
 
 .navbar {
   display: flex;
-  justify-content: space-between; /* left items left, right items right */
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 12px 20px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: hsla(240, 19%, 16%, 0.9);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  gap: 10px;
+  background: hsla(240, 19%, 16%, 0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  gap: 12px;
 }
 
 /* Left and Right sections */
 .nav-left, .nav-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 /* Nav buttons */
@@ -871,7 +871,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: white;
+  color: var(--foreground);
   width: 36px;
   height: 36px;
   display: flex;
@@ -886,6 +886,7 @@ body {
 .nav-btn img {
   max-height: 24px;
   max-width: 24px;
+  object-fit: contain;
 }
 
 /* Hover effect */
@@ -900,11 +901,51 @@ body {
   padding-top: 60px; /* adjust for navbar height */
 }
 
-/* Mobile: max 640px */
-@media (max-width: 640px) {
+/* ---------------- MOBILE MENU ---------------- */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--foreground);
+}
+
+/* Hide nav-right buttons on mobile initially */
+@media (max-width: 480px) {
+  .nav-right {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: hsla(240, 19%, 16%, 0.95);
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    gap: 0;
+    z-index: 999;
+  }
+  .nav-right.show {
+    max-height: 300px; /* adjust based on menu items */
+    padding: 10px 0;
+  }
+  .nav-btn {
+    width: 100%;
+    height: 50px;
+    justify-content: flex-start;
+    padding-left: 20px;
+    font-size: 1.1rem;
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* Mobile: 481px – 640px */
+@media (max-width: 640px) and (min-width: 481px) {
   .navbar {
     padding: 10px 15px;
-    gap: 8px;
   }
   .nav-left, .nav-right {
     gap: 8px;
@@ -912,11 +953,14 @@ body {
   .nav-btn {
     width: 32px;
     height: 32px;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .nav-btn img {
     max-height: 20px;
     max-width: 20px;
+  }
+  #app {
+    padding-top: 55px;
   }
 }
 
@@ -932,11 +976,14 @@ body {
   .nav-btn {
     width: 34px;
     height: 34px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .nav-btn img {
     max-height: 22px;
     max-width: 22px;
+  }
+  #app {
+    padding-top: 58px;
   }
 }
 
@@ -952,10 +999,13 @@ body {
   .nav-btn {
     width: 36px;
     height: 36px;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   .nav-btn img {
     max-height: 24px;
     max-width: 24px;
+  }
+  #app {
+    padding-top: 60px;
   }
 }

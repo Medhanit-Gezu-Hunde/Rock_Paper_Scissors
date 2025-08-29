@@ -4,51 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock Paper Scissors - Interactive Game</title>
-  <meta name="description" content="Play the classic Rock Paper Scissors game with beautiful animations and responsive design. Choose 5 or 7 rounds and challenge the computer!">
+  <meta name="description" content="Play the classic Rock Paper Scissors game with animations and responsive design. Choose 5 or 7 rounds and challenge the computer!">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Navigation Bar -->
-<nav class="navbar">
-  <div class="nav-left">
-    <button class="nav-btn" onclick="newGame()"><img src="public/image/home.png" alt="home"></button>
-    <button class="nav-btn about-btn" onclick="openAbout()"><img src="public/image/info.png" alt=""></button>    
-  </div>
-  <div class="nav-right">
-    <button class="nav-btn"> <img src="public/image/people.png" alt="users"></button>
-    <button class="nav-btn"><img src="public/image/settings.png" alt="settings"></button>
-  </div>
-</nav>
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="nav-btn" onclick="newGame()">
+        <img src="public/image/home.png" alt="Home">
+      </button>
+      <button class="nav-btn" onclick="openAbout()">
+        <img src="public/image/info.png" alt="About">
+      </button>
+    </div>
+    <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-right">
+      <button class="nav-btn"><img src="public/image/people.png" alt="Users"></button>
+      <button class="nav-btn"><img src="public/image/settings.png" alt="Settings"></button>
+    </div>
+  </nav>
 
-  <!-- About -->
-<div id="aboutModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeAbout()">&times;</span>
-    <h2>About the Game</h2>
-    <p>Welcome to Rock Paper Scissors!</p>
-    <ul>
-      <li>✊ Rock beats ✌️ Scissors</li>
-      <li>✋ Paper beats ✊ Rock</li>
-      <li>✌️ Scissors beats ✋ Paper</li>
-    </ul>
-    <p>Choose your move and see if you can beat the computer.  
-       Play in 5 or 7 rounds mode. Good luck 🎉!</p>
+  <!-- About Modal -->
+  <div id="aboutModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAbout()">&times;</span>
+      <h2>About the Game</h2>
+      <p>Welcome to Rock Paper Scissors!</p>
+      <ul>
+        <li>✊ Rock beats ✌️ Scissors</li>
+        <li>✋ Paper beats ✊ Rock</li>
+        <li>✌️ Scissors beats ✋ Paper</li>
+      </ul>
+      <p>Choose your move and see if you can beat the computer. Play 5 or 7 rounds. Good luck 🎉!</p>
+    </div>
   </div>
-</div>
 
+  <!-- Main App Container -->
   <div id="app" class="min-h-screen">
+    
     <!-- Game Setup Screen -->
-    <div id="setupScreen" class="screen active">
+    <section id="setupScreen" class="screen active">
       <div class="setup-container">
-        <div class="game-header">
+        <header class="game-header">
           <h1 class="game-title">✊ ✋ ✌️</h1>
           <h2 class="game-subtitle">Rock Paper Scissors</h2>
           <p class="game-description">Enter your name & choose your game mode!</p>
-        </div>
+        </header>
 
         <!-- Player Name Input -->
         <div class="player-name-input">
-          <label for="playerNameInput">Enter Your Name:</label>
+          <label for="playerNameInput">Your Name:</label>
           <input type="text" id="playerNameInput" placeholder="Player Name">
         </div>
 
@@ -58,12 +64,12 @@
           <button class="mode-btn secondary-btn" onclick="startGame(7)">7 Rounds</button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Game Playing Screen -->
-    <div id="gameScreen" class="screen">
+    <!-- Game Screen -->
+    <section id="gameScreen" class="screen">
       <div class="game-container">
-        <!-- Score Display -->
+        <!-- Scoreboard -->
         <div class="score-display">
           <div class="score-section">
             <h3 class="score-label" id="playerNameDisplay">You</h3>
@@ -83,11 +89,12 @@
           </div>
         </div>
 
+        <!-- Progress Bar -->
         <div class="progress-bar">
           <div id="progressFill" class="progress-fill"></div>
         </div>
 
-        <!-- Game Content -->
+        <!-- Choices -->
         <div id="choiceSection" class="choice-section">
           <h3 class="choice-title">Make Your Choice!</h3>
           <div class="choices-container">
@@ -106,7 +113,7 @@
           </div>
         </div>
 
-        <!-- Result Display -->
+        <!-- Result -->
         <div id="resultSection" class="result-section hidden">
           <div class="battle-display">
             <div class="player-choice">
@@ -121,22 +128,17 @@
               <p class="choice-owner">Computer</p>
             </div>
           </div>
-
           <p id="resultMessage" class="result-message">You Win! 🎉</p>
         </div>
 
-        <!-- Game Over Screen -->
+        <!-- Game Over -->
         <div id="gameOverSection" class="game-over-section hidden">
-          <div class="game-over-content">
-            <h2 class="game-over-title">Game Over!</h2>
-            <p id="finalResultMessage" class="final-result-message">🏆 Congratulations! You Won the Game! 🏆</p>
-
-            <div class="game-over-buttons">
-              <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
-              <button class="game-btn outline-btn" onclick="newGame()">New Game</button>
-              <!-- New button for leaderboard -->
-              <button id="viewLeaderboardBtn" class="game-btn secondary-btn">View Leaderboard</button>
-            </div>
+          <h2 class="game-over-title">Game Over!</h2>
+          <p id="finalResultMessage" class="final-result-message">🏆 Congratulations! You Won the Game! 🏆</p>
+          <div class="game-over-buttons">
+            <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
+            <button class="game-btn outline-btn" onclick="newGame()">New Game</button>
+            <button id="viewLeaderboardBtn" class="game-btn secondary-btn" onclick="showLeaderboard()">View Leaderboard</button>
           </div>
         </div>
 
@@ -145,11 +147,11 @@
           <button class="game-btn outline-btn small" onclick="newGame()">Back to Menu</button>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 
   <!-- Leaderboard Section -->
-  <div id="leaderboardSection" class="leaderboard-section hidden">
+  <section id="leaderboardSection" class="leaderboard-section hidden">
     <div class="leaderboard-content">
       <h2 class="leaderboard-title">🏆 Leaderboard 🏆</h2>
       <table class="leaderboard-table">
@@ -161,16 +163,15 @@
           </tr>
         </thead>
         <tbody id="leaderboardBody">
-          <!-- Scores will be dynamically inserted -->
+          <!-- Dynamic rows -->
         </tbody>
       </table>
       <div class="leaderboard-buttons">
-        <!-- fixed Play Again to call playAgain() -->
         <button class="game-btn primary-btn" onclick="playAgain()">Play Again</button>
         <button class="game-btn outline-btn" onclick="newGame()">Back to Menu</button>
       </div>
     </div>
-  </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
