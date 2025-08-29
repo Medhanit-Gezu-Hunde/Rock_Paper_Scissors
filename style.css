@@ -845,100 +845,117 @@ body {
   }
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between; /* left items left, right items right */
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: hsla(240, 19%, 16%, 0.9);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  gap: 10px;
+}
 
+/* Left and Right sections */
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+/* Nav buttons */
 .nav-btn {
   background: none;
   border: none;
-  font-size: 1rem; /* smaller icons/text */
   cursor: pointer;
   color: white;
-  width: 36px; /* reduced size */
-  height: 36px; /* reduced size */
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
   transition: transform 0.2s, color 0.2s, box-shadow 0.2s;
-}
- .navbar {
-display: flex;
-  justify-content: flex-end; /* move content to the right */
-  align-items: center;
-  padding: 8px 20px;
-  position: sticky;
-
-  right: 0; /* align right */
-  width: 100%;
-  z-index: 100;
-  gap: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  font-size: 1rem;
 }
 
-.nav-btn.about-btn {
-    color: black; 
-}
-
+/* Images inside buttons */
 .nav-btn img {
-  max-height: 24px; /* scale down images */
+  max-height: 24px;
   max-width: 24px;
 }
 
+/* Hover effect */
 .nav-btn:hover {
   transform: scale(1.1);
-  color: #ffcc00; /* hover highlight */
-  box-shadow: 0 0 12px hsla(48, 96%, 63%, 0.7); /* subtle glow */
+  color: #ffcc00;
+  box-shadow: 0 0 12px hsla(48, 96%, 63%, 0.7);
 }
 
-/* Push game content down so navbar doesn't overlap */
+/* Push content down */
 #app {
-  padding-top: 60px; /* adjust to navbar height */
+  padding-top: 60px; /* adjust for navbar height */
 }
 
-/* 📱 Mobile (max 640px) */
+/* Mobile: max 640px */
 @media (max-width: 640px) {
   .navbar {
     padding: 10px 15px;
+    gap: 8px;
   }
-
-  .nav-left,
-  .nav-right {
-    gap: 10px;
+  .nav-left, .nav-right {
+    gap: 8px;
   }
-
   .nav-btn {
+    width: 32px;
+    height: 32px;
     font-size: 1.2rem;
+  }
+  .nav-btn img {
+    max-height: 20px;
+    max-width: 20px;
   }
 }
 
-/* 📱 Tablet (641px – 1023px) */
+/* Tablet: 641px – 1023px */
 @media (min-width: 641px) and (max-width: 1023px) {
   .navbar {
     padding: 12px 25px;
+    gap: 15px;
   }
-
-  .nav-left,
-  .nav-right {
-    gap: 20px;
+  .nav-left, .nav-right {
+    gap: 15px;
   }
-
   .nav-btn {
-    font-size: 1.6rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.5rem;
+  }
+  .nav-btn img {
+    max-height: 22px;
+    max-width: 22px;
   }
 }
 
-/* 💻 Desktop (1024px and up) */
+/* Desktop: 1024px and up */
 @media (min-width: 1024px) {
   .navbar {
     padding: 15px 40px;
+    gap: 20px;
   }
-
-  .nav-left,
-  .nav-right {
-    gap: 25px;
+  .nav-left, .nav-right {
+    gap: 20px;
   }
-
   .nav-btn {
+    width: 36px;
+    height: 36px;
     font-size: 1.8rem;
+  }
+  .nav-btn img {
+    max-height: 24px;
+    max-width: 24px;
   }
 }
